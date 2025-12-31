@@ -4,9 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Ambiente de teste Fundo de Pensão</title>
+    <title>Login | FundodePensão</title>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+
+body{
+    background-color: #F0F4F9;
+}
+
+
+#card {
+    max-width: 500px;
+    margin: 250px auto;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+
+
+h1 {
+    padding: 10px;
+}
+
+p {
+    padding: 10px;
+}
+
+#botao {
+    background-color: #005EA6;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 0px;
+}
+
+</style>
+
 </head>
 <body>
-    <h1>Ambiente de Integração do Fundo de Pensão</h1>
+
+    <div id="card">
+        <form action="cadastro.php">
+            <h1>Fundo de Pensão</h1>
+            <p><input type="email" name="email" id="iemail" placeholder="Email"></p>
+            <p><input type="password" name="senha" id="isenha" placeholder="senha"></p>
+            <input type="submit" value="Entrar" id="botao" >
+        
+        </form>
+    </div>
 </body>
 </html>
