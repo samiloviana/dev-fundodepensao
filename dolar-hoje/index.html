@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Confira a cotação do dólar hoje em tempo real, fonte do Banco Central do Brasil e histórico atualizado. Valor e Preço.">
+  <title>Dolar hoje | Cotação do Dólar Hoje – Atualizado em Tempo Real</title>
+  <link rel="shortcut icon" href="icon/favicon.ico?v=1.0" type="image/x-icon">
+  <link rel="stylesheet" href="style/style.css?v=1.1">
+    <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+</style>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LWR8JM2VS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3LWR8JM2VS');
+</script>
+</head>
+<body>
+  <header>
+  </header>
+
+    <main>
+
+
+      <h1 class="dolar-titulo">Dolar Hoje<img src="img/dolar-hoje-transparente.png" alt="dolar-hoje" class="dolar-icone"></h1>
+
+      <p id="preco-dolar-hoje"></p>
+
+
+
+<footer>
+  <p class="fonte">
+    Fonte:
+    <a href="https://www.bcb.gov.br" target="_blank" rel="noopener noreferrer">
+      Banco Central do Brasil
+    </a>
+  </p>
+</footer>
+
+    </main>
+
+
+    <script>
+      
+const preco = document.querySelector("#preco-dolar-hoje");
+
+fetch("https://api-dolar-5bvc.onrender.com/api/moeda")
+  .then(res => res.json())
+  .then(data => {
+
+    const precoFormatado = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(Number(data.USD));
+
+    preco.innerText = "US$ 1,00 = " + precoFormatado;
+  });
+
+
+    </script>
+
+</body>
+</html>
