@@ -96,7 +96,7 @@
     </div>
 
     <script>
-        fetch("http://localhost:10000/BBAS3")
+        fetch("https://api.fundodepensao.com.br/BBAS3")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#logo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
@@ -107,7 +107,7 @@
             document.querySelector("#valorMercado").innerText =  data.results[0].marketCap
         })
 
-        fetch("http://localhost:10000/ITUB4")
+        fetch("https://api.fundodepensao.com.br/ITUB4")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#ilogo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
@@ -120,7 +120,7 @@
              })
 
 
-        fetch("http://localhost:10000/BBDC4")
+        fetch("https://api.fundodepensao.com.br/BBDC4")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#blogo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
@@ -132,7 +132,7 @@
 
              })
 
-        fetch("http://localhost:10000/SANB11")
+        fetch("https://api.fundodepensao.com.br/SANB11")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#slogo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
