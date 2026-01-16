@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
     <title>Fundo de Pensão | Construa seu propio fundo e garanta uma renda</title>
     <style>
         *{
@@ -14,7 +13,7 @@
         }
 
         .container {
-            width: 1000px;
+           max-width: 1000px;
             margin: 80px auto;
         }
 
@@ -36,6 +35,7 @@
             border-bottom: 1px solid rgb(230, 227, 227);
         }
 
+        
     </style>
 </head>
 <body>
@@ -55,14 +55,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td id="logo"></td>
-                    <td id="papel"></td>
-                    <td id="empresa"></td>
-                    <td id="cotacao"></td>
-                    <td id="variacao"></td>
-                    <td id="valorMercado"></td>
-                </tr>
 
                 <tr>
                     <td id="ilogo"></td>
@@ -81,6 +73,15 @@
                     <td id="bvariacao"></td>
                     <td id="bvalorMercado"></td>
                 </tr>
+
+                <tr>
+                    <td id="logo"></td>
+                    <td id="papel"></td>
+                    <td id="empresa"></td>
+                    <td id="cotacao"></td>
+                    <td id="variacao"></td>
+                    <td id="valorMercado"></td>
+                </tr>
                 
                 <tr>
                     <td id="slogo"></td>
@@ -96,18 +97,32 @@
     </div>
 
     <script>
-        fetch("https://api.fundodepensao.com.br/BBAS3")
+        function formatarvalor(valor) {
+            if(valor >= 1_000_000_000) {
+                return "R$ " +  Math.round(valor / 1_000_000_000) + "B"
+            }
+
+            if(valor >= 1_000_000) {
+                return "R$" + Math.round(valor / 1_000_000) + "M"
+            }
+
+            return "R$" + valor.toLocaleString("pt-BR")
+        }
+
+
+        fetch("http://localhost:10000/BBAS3")
         .then(res => res.json())
         .then(data => {
+
             document.querySelector("#logo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
             document.querySelector("#papel").innerText = data.results[0].symbol
             document.querySelector("#empresa").innerText = data.results[0].longName
             document.querySelector("#cotacao").innerText = data.results[0].regularMarketPrice.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
             document.querySelector("#variacao").innerText = (data.results[0].regularMarketChangePercent / 100).toLocaleString("pt-BR", {style: "percent", minimumFractionDigits:2})
-            document.querySelector("#valorMercado").innerText =  data.results[0].marketCap
+            document.querySelector("#valorMercado").innerText =  formatarvalor(data.results[0].marketCap)
         })
 
-        fetch("https://api.fundodepensao.com.br/ITUB4")
+        fetch("http://localhost:10000/ITUB4")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#ilogo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
@@ -115,12 +130,12 @@
             document.querySelector("#iempresa").innerText = data.results[0].longName
             document.querySelector("#icotacao").innerText = data.results[0].regularMarketPrice.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
             document.querySelector("#ivariacao").innerText = (data.results[0].regularMarketChangePercent / 100).toLocaleString("pt-BR", {style: "percent", minimumFractionDigits:2})
-            document.querySelector("#ivalorMercado").innerText =  data.results[0].marketCap
+            document.querySelector("#ivalorMercado").innerText =  formatarvalor(data.results[0].marketCap)
 
              })
 
 
-        fetch("https://api.fundodepensao.com.br/BBDC4")
+        fetch("http://localhost:10000/BBDC4")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#blogo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
@@ -128,11 +143,11 @@
             document.querySelector("#bempresa").innerText = data.results[0].longName
             document.querySelector("#bcotacao").innerText = data.results[0].regularMarketPrice.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
             document.querySelector("#bvariacao").innerText = (data.results[0].regularMarketChangePercent / 100).toLocaleString("pt-BR", {style: "percent", minimumFractionDigits:2})
-            document.querySelector("#bvalorMercado").innerText =  data.results[0].marketCap
+            document.querySelector("#bvalorMercado").innerText =  formatarvalor(data.results[0].marketCap)
 
              })
 
-        fetch("https://api.fundodepensao.com.br/SANB11")
+        fetch("http://localhost:10000/SANB11")
         .then(res => res.json())
         .then(data => {
             document.querySelector("#slogo").innerHTML = `<img src="${data.results[0].logourl}" alt="logo">`
@@ -140,7 +155,7 @@
             document.querySelector("#sempresa").innerText = data.results[0].longName
             document.querySelector("#scotacao").innerText = data.results[0].regularMarketPrice.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
             document.querySelector("#svariacao").innerText = (data.results[0].regularMarketChangePercent / 100).toLocaleString("pt-BR", {style: "percent", minimumFractionDigits:2})
-            document.querySelector("#svalorMercado").innerText =  data.results[0].marketCap
+            document.querySelector("#svalorMercado").innerText =  formatarvalor(data.results[0].marketCap)
 
              })
 
