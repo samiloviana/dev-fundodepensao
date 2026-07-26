@@ -22,7 +22,7 @@
             const cotacao = document.querySelector(".cotacao")
             const atualizacao = document.querySelector(".atualizacao")
             async function pesquisadolar() {
-            const apicotacao = await fetch("http://15.229.48.26:3000/moedas")
+            const apicotacao = await fetch("https://15.229.48.26:3000/moedas")
             const dados = await apicotacao.json()
             cotacao.innerText = `U$ 1,00 = R$ ${Number(dados.USDBRL.bid).toFixed(2)}`
             const data = new Date(dados.USDBRL.create_date)
