@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Acompanhe a cotação do dólar atualizada a cada 1 hora.">
     <title>fundodepensao.com.br | Saúde Financeira em Todas as Fases da Vida</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
@@ -25,15 +25,8 @@
             async function pesquisadolar() {
             const apicotacao = await fetch("https://api.fundodepensao.com.br/moedas")
             const dados = await apicotacao.json()
-            cotacao.innerText = `${Number(1).toLocaleString("pt-br", {
-                style:"currency",
-                currency:"USD"
-            })} = ${Number(dados.conversion_rates.BRL).toLocaleString("pt-br", {
-                style:"currency",
-                currency:"BRL"
-            })}`
-
-            const data = new Date(dados.time_last_update_unix * 1000)
+            cotacao.innerText = `${Number(1).toLocaleString("pt-br", {style:"currency", currency:"CHF"})} = R$ ${Number(dados.conversion_rates.BRL / dados.conversion_rates.GBP ).toFixed(2)}`
+            const data = new Date(dados.time_last_update_utc)
             atualizacao.innerText = data.toLocaleString("pt-br", {
                 day: "2-digit",
                 month:"short",
@@ -41,8 +34,6 @@
                 minute:"2-digit"
             })
             }
-
-
             pesquisadolar()
         </script>
 </body>

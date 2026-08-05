@@ -25,8 +25,15 @@
             async function pesquisadolar() {
             const apicotacao = await fetch("https://api.fundodepensao.com.br/moedas")
             const dados = await apicotacao.json()
-            cotacao.innerText = `U$ 1,00 = R$ ${Number(dados.USDBRL.bid).toFixed(2)}`
-            const data = new Date(dados.USDBRL.create_date)
+            cotacao.innerText = `${Number(1).toLocaleString("pt-br", {
+                style:"currency",
+                currency:"USD"
+            })} = ${Number(dados.conversion_rates.BRL).toLocaleString("pt-br", {
+                style:"currency",
+                currency:"BRL"
+            })}`
+
+            const data = new Date(dados.time_last_update_unix * 1000)
             atualizacao.innerText = data.toLocaleString("pt-br", {
                 day: "2-digit",
                 month:"short",
@@ -34,6 +41,8 @@
                 minute:"2-digit"
             })
             }
+
+
             pesquisadolar()
         </script>
 </body>
